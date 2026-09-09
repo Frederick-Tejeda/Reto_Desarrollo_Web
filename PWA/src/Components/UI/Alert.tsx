@@ -3,11 +3,12 @@ import React from 'react';
 interface AlertProps {
   type?: 'success' | 'warning' | 'error' | 'info';
   title?: string;
-  children: React.ReactNode;
+  message?: string;
+  children?: React.ReactNode;
   className?: string;
 }
 
-export const Alert: React.FC<AlertProps> = ({ type = 'info', title, children, className = '' }) => {
+export const Alert: React.FC<AlertProps> = ({ type = 'info', title, message, children, className = '' }) => {
   const styles = {
     success: 'bg-green-100 text-green-800 border-green-500',
     warning: 'bg-yellow-100 text-yellow-800 border-yellow-500',
@@ -47,7 +48,7 @@ export const Alert: React.FC<AlertProps> = ({ type = 'info', title, children, cl
         <div className="ml-3">
           {title && <h3 className="text-sm font-medium">{title}</h3>}
           <div className={`text-sm ${title ? 'mt-2' : ''}`}>
-            {children}
+            {children || message}
           </div>
         </div>
       </div>

@@ -33,13 +33,19 @@ import { FormularioEmpresa } from './Rutas/Empresa/Empresas/FormularioEmpresa';
 import { ListadoEstablecimientos } from './Rutas/Empresa/Establecimientos/ListadoEstablecimientos';
 import { FormularioEstablecimiento } from './Rutas/Empresa/Establecimientos/FormularioEstablecimiento';
 import Informes from './Rutas/Empresa/Informes/Informes';
-import Solicitudes from './Rutas/Empresa/Solicitudes/Solicitudes';
+import { ListadoSolicitudes } from './Rutas/Empresa/Solicitudes/ListadoSolicitudes';
+import { FormularioSolicitud } from './Rutas/Empresa/Solicitudes/FormularioSolicitud';
 
 // Rutas de Coordinacion
-import Asignaciones from './Rutas/Coordinacion/Asignaciones/Asignaciones';
-import Bandeja_de_casos from './Rutas/Coordinacion/Bandeja_de_casos/Bandeja_de_casos';
-import Denuncias from './Rutas/Coordinacion/Denuncias/Denuncias';
-import Programacion from './Rutas/Coordinacion/Programacion/Programacion';
+import { ListadoCasos } from './Rutas/Coordinacion/Bandeja_de_casos/ListadoCasos';
+import { DetalleCaso } from './Rutas/Coordinacion/Bandeja_de_casos/DetalleCaso';
+import { ListadoDenuncias } from './Rutas/Coordinacion/Denuncias/ListadoDenuncias';
+import { FormularioDenuncia } from './Rutas/Coordinacion/Denuncias/FormularioDenuncia';
+import { ListadoProgramacion } from './Rutas/Coordinacion/Programacion/ListadoProgramacion';
+import { FormularioProgramacion } from './Rutas/Coordinacion/Programacion/FormularioProgramacion';
+import { ListadoAsignaciones } from './Rutas/Coordinacion/Asignaciones/ListadoAsignaciones';
+import { ListadoAlertas } from './Rutas/Coordinacion/Bandeja_de_casos/ListadoAlertas';
+import { DetalleAlerta } from './Rutas/Coordinacion/Bandeja_de_casos/DetalleAlerta';
 import Revision_y_cierre from './Rutas/Coordinacion/Revision_y_cierre/Revision_y_cierre';
 
 // Rutas de Administracion
@@ -89,13 +95,20 @@ function App() {
         <Route path="/establecimientos" element={<ListadoEstablecimientos />} />
         <Route path="/establecimientos/nuevo" element={<FormularioEstablecimiento />} />
         <Route path="/informes" element={<Informes />} />
-        <Route path="/solicitudes" element={<Solicitudes />} />
+        <Route path="/solicitudes" element={<ListadoSolicitudes />} />
+        <Route path="/solicitudes/nueva" element={<FormularioSolicitud />} />
+        <Route path="/solicitudes/:id" element={<FormularioSolicitud />} />
 
         {/* Rutas de Coordinacion */}
-        <Route path="/asignaciones" element={<Asignaciones />} />
-        <Route path="/bandeja_de_casos" element={<Bandeja_de_casos />} />
-        <Route path="/denuncias" element={<Denuncias />} />
-        <Route path="/programacion" element={<Programacion />} />
+        <Route path="/bandeja_de_casos" element={<ListadoCasos />} />
+        <Route path="/bandeja_de_casos/:id" element={<DetalleCaso />} />
+        <Route path="/denuncias" element={<ListadoDenuncias />} />
+        <Route path="/denuncias/:id" element={<FormularioDenuncia />} />
+        <Route path="/programacion" element={<ListadoProgramacion />} />
+        <Route path="/programacion/:id" element={<FormularioProgramacion />} />
+        <Route path="/asignaciones" element={<ListadoAsignaciones />} />
+        <Route path="/alertas_lapch" element={<ListadoAlertas />} />
+        <Route path="/alertas_lapch/:id" element={<DetalleAlerta />} />
         <Route path="/revision_y_cierre" element={<Revision_y_cierre />} />
 
         {/* Rutas de Administracion */}
