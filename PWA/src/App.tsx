@@ -28,8 +28,10 @@ import Sincronización from './Rutas/Evaluacion/Sincronización/Sincronización'
 import Casos from './Rutas/Empresa/Casos/Casos';
 import Correcciones from './Rutas/Empresa/Correcciones/Correcciones';
 import Delegados from './Rutas/Empresa/Delegados/Delegados';
-import Empresas from './Rutas/Empresa/Empresas/Empresas';
-import Establecimientos from './Rutas/Empresa/Establecimientos/Establecimientos';
+import { ListadoEmpresas } from './Rutas/Empresa/Empresas/ListadoEmpresas';
+import { FormularioEmpresa } from './Rutas/Empresa/Empresas/FormularioEmpresa';
+import { ListadoEstablecimientos } from './Rutas/Empresa/Establecimientos/ListadoEstablecimientos';
+import { FormularioEstablecimiento } from './Rutas/Empresa/Establecimientos/FormularioEstablecimiento';
 import Informes from './Rutas/Empresa/Informes/Informes';
 import Solicitudes from './Rutas/Empresa/Solicitudes/Solicitudes';
 
@@ -82,8 +84,10 @@ function App() {
         <Route path="/casos" element={<Casos />} />
         <Route path="/correcciones" element={<Correcciones />} />
         <Route path="/delegados" element={<Delegados />} />
-        <Route path="/empresas" element={<Empresas />} />
-        <Route path="/establecimientos" element={<Establecimientos />} />
+        <Route path="/empresas" element={<ListadoEmpresas />} />
+        <Route path="/empresas/nueva" element={<FormularioEmpresa />} />
+        <Route path="/establecimientos" element={<ListadoEstablecimientos />} />
+        <Route path="/establecimientos/nuevo" element={<FormularioEstablecimiento />} />
         <Route path="/informes" element={<Informes />} />
         <Route path="/solicitudes" element={<Solicitudes />} />
 
