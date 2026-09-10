@@ -14,6 +14,9 @@ import Ayuda from './Rutas/General/Ayuda/Ayuda';
 import Cambio_de_contraseña from './Rutas/General/Cambio_de_contraseña/Cambio_de_contraseña';
 import Dashboard from './Rutas/General/Dashboard/Dashboard';
 import Perfil from './Rutas/General/Perfil/Perfil';
+import { ListadoConsulta } from './Rutas/General/Consulta_Historica/ListadoConsulta';
+import { DetalleHistorico } from './Rutas/General/Consulta_Historica/DetalleHistorico';
+import { CentroNotificaciones } from './Rutas/General/Notificaciones/CentroNotificaciones';
 
 // Rutas de Evaluacion
 import { Agenda } from './Rutas/Evaluacion/Agenda/Agenda';
@@ -26,19 +29,22 @@ import Sincronización from './Rutas/Evaluacion/Sincronización/Sincronización'
 
 // Rutas de Empresa
 import Casos from './Rutas/Empresa/Casos/Casos';
-import Correcciones from './Rutas/Empresa/Correcciones/Correcciones';
+import { ListadoCorrecciones } from './Rutas/Empresa/Correcciones/ListadoCorrecciones';
+import { DetalleCorreccion } from './Rutas/Empresa/Correcciones/DetalleCorreccion';
 import Delegados from './Rutas/Empresa/Delegados/Delegados';
 import { ListadoEmpresas } from './Rutas/Empresa/Empresas/ListadoEmpresas';
 import { FormularioEmpresa } from './Rutas/Empresa/Empresas/FormularioEmpresa';
 import { ListadoEstablecimientos } from './Rutas/Empresa/Establecimientos/ListadoEstablecimientos';
 import { FormularioEstablecimiento } from './Rutas/Empresa/Establecimientos/FormularioEstablecimiento';
-import Informes from './Rutas/Empresa/Informes/Informes';
+import { ListadoInformes } from './Rutas/Empresa/Informes/ListadoInformes';
+import { VisorInforme } from './Rutas/Empresa/Informes/VisorInforme';
 import { ListadoSolicitudes } from './Rutas/Empresa/Solicitudes/ListadoSolicitudes';
 import { FormularioSolicitud } from './Rutas/Empresa/Solicitudes/FormularioSolicitud';
 
 // Rutas de Coordinacion
 import { ListadoCasos } from './Rutas/Coordinacion/Bandeja_de_casos/ListadoCasos';
 import { DetalleCaso } from './Rutas/Coordinacion/Bandeja_de_casos/DetalleCaso';
+import { CierreExpediente } from './Rutas/Coordinacion/Bandeja_de_casos/CierreExpediente';
 import { ListadoDenuncias } from './Rutas/Coordinacion/Denuncias/ListadoDenuncias';
 import { FormularioDenuncia } from './Rutas/Coordinacion/Denuncias/FormularioDenuncia';
 import { ListadoProgramacion } from './Rutas/Coordinacion/Programacion/ListadoProgramacion';
@@ -46,12 +52,14 @@ import { FormularioProgramacion } from './Rutas/Coordinacion/Programacion/Formul
 import { ListadoAsignaciones } from './Rutas/Coordinacion/Asignaciones/ListadoAsignaciones';
 import { ListadoAlertas } from './Rutas/Coordinacion/Bandeja_de_casos/ListadoAlertas';
 import { DetalleAlerta } from './Rutas/Coordinacion/Bandeja_de_casos/DetalleAlerta';
-import Revision_y_cierre from './Rutas/Coordinacion/Revision_y_cierre/Revision_y_cierre';
+import { ListadoRevisiones } from './Rutas/Coordinacion/Revision_y_cierre/ListadoRevisiones';
+import { RevisarEvaluacion } from './Rutas/Coordinacion/Revision_y_cierre/RevisarEvaluacion';
 
 // Rutas de Administracion
 import Auditoria from './Rutas/Administracion/Auditoria/Auditoria';
 import Catalogos from './Rutas/Administracion/Catalogos/Catalogos';
-import Fichas from './Rutas/Administracion/Fichas/Fichas';
+import { ListadoFichas } from './Rutas/Administracion/Fichas/ListadoFichas';
+import { EditorFicha } from './Rutas/Administracion/Fichas/EditorFicha';
 import Plantillas_de_correo from './Rutas/Administracion/Plantillas_de_correo/Plantillas_de_correo';
 import Reglas_de_riesgo from './Rutas/Administracion/Reglas_de_riesgo/Reglas_de_riesgo';
 import Roles from './Rutas/Administracion/Roles/Roles';
@@ -76,6 +84,9 @@ function App() {
         <Route path="/cambio_de_contraseña" element={<Cambio_de_contraseña />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/consulta_historica" element={<ListadoConsulta />} />
+        <Route path="/consulta_historica/:id" element={<DetalleHistorico />} />
+        <Route path="/notificaciones" element={<CentroNotificaciones />} />
 
         {/* Rutas de Evaluacion */}
         <Route path="/agenda" element={<Agenda />} />
@@ -88,13 +99,15 @@ function App() {
 
         {/* Rutas de Empresa */}
         <Route path="/casos" element={<Casos />} />
-        <Route path="/correcciones" element={<Correcciones />} />
+        <Route path="/correcciones" element={<ListadoCorrecciones />} />
+        <Route path="/correcciones/:id" element={<DetalleCorreccion />} />
         <Route path="/delegados" element={<Delegados />} />
         <Route path="/empresas" element={<ListadoEmpresas />} />
         <Route path="/empresas/nueva" element={<FormularioEmpresa />} />
         <Route path="/establecimientos" element={<ListadoEstablecimientos />} />
         <Route path="/establecimientos/nuevo" element={<FormularioEstablecimiento />} />
-        <Route path="/informes" element={<Informes />} />
+        <Route path="/informes" element={<ListadoInformes />} />
+        <Route path="/informes/:id" element={<VisorInforme />} />
         <Route path="/solicitudes" element={<ListadoSolicitudes />} />
         <Route path="/solicitudes/nueva" element={<FormularioSolicitud />} />
         <Route path="/solicitudes/:id" element={<FormularioSolicitud />} />
@@ -102,6 +115,7 @@ function App() {
         {/* Rutas de Coordinacion */}
         <Route path="/bandeja_de_casos" element={<ListadoCasos />} />
         <Route path="/bandeja_de_casos/:id" element={<DetalleCaso />} />
+        <Route path="/bandeja_de_casos/:id/cierre" element={<CierreExpediente />} />
         <Route path="/denuncias" element={<ListadoDenuncias />} />
         <Route path="/denuncias/:id" element={<FormularioDenuncia />} />
         <Route path="/programacion" element={<ListadoProgramacion />} />
@@ -109,12 +123,14 @@ function App() {
         <Route path="/asignaciones" element={<ListadoAsignaciones />} />
         <Route path="/alertas_lapch" element={<ListadoAlertas />} />
         <Route path="/alertas_lapch/:id" element={<DetalleAlerta />} />
-        <Route path="/revision_y_cierre" element={<Revision_y_cierre />} />
+        <Route path="/revision_y_cierre" element={<ListadoRevisiones />} />
+        <Route path="/revision_y_cierre/:id" element={<RevisarEvaluacion />} />
 
         {/* Rutas de Administracion */}
         <Route path="/auditoria" element={<Auditoria />} />
         <Route path="/catalogos" element={<Catalogos />} />
-        <Route path="/fichas" element={<Fichas />} />
+        <Route path="/fichas" element={<ListadoFichas />} />
+        <Route path="/fichas/editor/:id" element={<EditorFicha />} />
         <Route path="/plantillas_de_correo" element={<Plantillas_de_correo />} />
         <Route path="/reglas_de_riesgo" element={<Reglas_de_riesgo />} />
         <Route path="/roles" element={<Roles />} />
