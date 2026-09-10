@@ -16,9 +16,9 @@ import Dashboard from './Rutas/General/Dashboard/Dashboard';
 import Perfil from './Rutas/General/Perfil/Perfil';
 
 // Rutas de Evaluacion
-import Agenda from './Rutas/Evaluacion/Agenda/Agenda';
+import { Agenda } from './Rutas/Evaluacion/Agenda/Agenda';
 import Descarga_offline from './Rutas/Evaluacion/Descarga_offline/Descarga_offline';
-import Ejecucion from './Rutas/Evaluacion/Ejecucion/Ejecucion';
+import { Ejecucion } from './Rutas/Evaluacion/Ejecucion/Ejecucion';
 import Envio from './Rutas/Evaluacion/Envio/Envio';
 import Evidencias from './Rutas/Evaluacion/Evidencias/Evidencias';
 import Resumen from './Rutas/Evaluacion/Resumen/Resumen';
