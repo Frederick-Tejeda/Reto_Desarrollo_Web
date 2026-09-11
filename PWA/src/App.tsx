@@ -1,5 +1,7 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Sidebar } from './Components/Layout/Sidebar';
 
 // Rutas Publicas
 import Error from './Rutas/Publica/Error/Error';
@@ -66,78 +68,101 @@ import Roles from './Rutas/Administracion/Roles/Roles';
 import Salud_operativa_autorizada from './Rutas/Administracion/Salud_operativa_autorizada/Salud_operativa_autorizada';
 import Usuarios from './Rutas/Administracion/Usuarios/Usuarios';
 
+// Componente Wrapper para inyectar el Layout dinámicamente si hay sesión
+const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const [isSidebarExpanded, setIsSidebarExpanded] = React.useState(false);
+  const isAuth = !!sessionStorage.getItem('jwt_mock');
+  const isPublicRoute = ['/', '/error', '/offline', '/nueva_contraseña', '/otp', '/recuperacion'].includes(location.pathname);
+
+  if (isPublicRoute || !isAuth) {
+    return <>{children}</>;
+  }
+
+  return (
+    <div className="flex min-h-screen bg-gray-100">
+      <Sidebar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded} />
+      <div className={`flex-1 transition-all duration-300 ${isSidebarExpanded ? 'ml-64' : 'ml-20'} overflow-x-hidden`}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Rutas Públicas */}
-        <Route path="/error" element={<Error />} />
-        <Route path="/offline" element={<Offline />} />
-        <Route path="/" element={<Inicio_de_sesion />} />
-        <Route path="/nueva_contraseña" element={<Nueva_Contraseña />} />
-        <Route path="/otp" element={<OTP />} />
-        <Route path="/recuperacion" element={<Recuperacion />} />
+      <LayoutWrapper>
+        <Routes>
+          {/* Rutas Públicas */}
+          <Route path="/error" element={<Error />} />
+          <Route path="/offline" element={<Offline />} />
+          <Route path="/" element={<Inicio_de_sesion />} />
+          <Route path="/nueva_contraseña" element={<Nueva_Contraseña />} />
+          <Route path="/otp" element={<OTP />} />
+          <Route path="/recuperacion" element={<Recuperacion />} />
 
-        {/* Rutas de General */}
-        <Route path="/ayuda" element={<Ayuda />} />
-        <Route path="/cambio_de_contraseña" element={<Cambio_de_contraseña />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/consulta_historica" element={<ListadoConsulta />} />
-        <Route path="/consulta_historica/:id" element={<DetalleHistorico />} />
-        <Route path="/notificaciones" element={<CentroNotificaciones />} />
+          {/* Rutas de General */}
+          <Route path="/ayuda" element={<Ayuda />} />
+          <Route path="/cambio_de_contraseña" element={<Cambio_de_contraseña />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/consulta_historica" element={<ListadoConsulta />} />
+          <Route path="/consulta_historica/:id" element={<DetalleHistorico />} />
+          <Route path="/notificaciones" element={<CentroNotificaciones />} />
 
-        {/* Rutas de Evaluacion */}
-        <Route path="/agenda" element={<Agenda />} />
-        <Route path="/descarga_offline" element={<Descarga_offline />} />
-        <Route path="/ejecucion" element={<Ejecucion />} />
-        <Route path="/envio" element={<Envio />} />
-        <Route path="/evidencias" element={<Evidencias />} />
-        <Route path="/resumen" element={<Resumen />} />
-        <Route path="/sincronización" element={<Sincronización />} />
+          {/* Rutas de Evaluacion */}
+          <Route path="/agenda" element={<Agenda />} />
+          <Route path="/descarga_offline" element={<Descarga_offline />} />
+          <Route path="/ejecucion" element={<Ejecucion />} />
+          <Route path="/envio" element={<Envio />} />
+          <Route path="/evidencias" element={<Evidencias />} />
+          <Route path="/resumen" element={<Resumen />} />
+          <Route path="/sincronización" element={<Sincronización />} />
 
-        {/* Rutas de Empresa */}
-        <Route path="/casos" element={<Casos />} />
-        <Route path="/correcciones" element={<ListadoCorrecciones />} />
-        <Route path="/correcciones/:id" element={<DetalleCorreccion />} />
-        <Route path="/delegados" element={<Delegados />} />
-        <Route path="/empresas" element={<ListadoEmpresas />} />
-        <Route path="/empresas/nueva" element={<FormularioEmpresa />} />
-        <Route path="/establecimientos" element={<ListadoEstablecimientos />} />
-        <Route path="/establecimientos/nuevo" element={<FormularioEstablecimiento />} />
-        <Route path="/informes" element={<ListadoInformes />} />
-        <Route path="/informes/:id" element={<VisorInforme />} />
-        <Route path="/solicitudes" element={<ListadoSolicitudes />} />
-        <Route path="/solicitudes/nueva" element={<FormularioSolicitud />} />
-        <Route path="/solicitudes/:id" element={<FormularioSolicitud />} />
+          {/* Rutas de Empresa */}
+          <Route path="/casos" element={<Casos />} />
+          <Route path="/correcciones" element={<ListadoCorrecciones />} />
+          <Route path="/correcciones/:id" element={<DetalleCorreccion />} />
+          <Route path="/delegados" element={<Delegados />} />
+          <Route path="/empresas" element={<ListadoEmpresas />} />
+          <Route path="/empresas/nueva" element={<FormularioEmpresa />} />
+          <Route path="/establecimientos" element={<ListadoEstablecimientos />} />
+          <Route path="/establecimientos/nuevo" element={<FormularioEstablecimiento />} />
+          <Route path="/informes" element={<ListadoInformes />} />
+          <Route path="/informes/:id" element={<VisorInforme />} />
+          <Route path="/solicitudes" element={<ListadoSolicitudes />} />
+          <Route path="/solicitudes/nueva" element={<FormularioSolicitud />} />
+          <Route path="/solicitudes/:id" element={<FormularioSolicitud />} />
 
-        {/* Rutas de Coordinacion */}
-        <Route path="/bandeja_de_casos" element={<ListadoCasos />} />
-        <Route path="/bandeja_de_casos/:id" element={<DetalleCaso />} />
-        <Route path="/bandeja_de_casos/:id/cierre" element={<CierreExpediente />} />
-        <Route path="/denuncias" element={<ListadoDenuncias />} />
-        <Route path="/denuncias/:id" element={<FormularioDenuncia />} />
-        <Route path="/programacion" element={<ListadoProgramacion />} />
-        <Route path="/programacion/:id" element={<FormularioProgramacion />} />
-        <Route path="/asignaciones" element={<ListadoAsignaciones />} />
-        <Route path="/alertas_lapch" element={<ListadoAlertas />} />
-        <Route path="/alertas_lapch/:id" element={<DetalleAlerta />} />
-        <Route path="/revision_y_cierre" element={<ListadoRevisiones />} />
-        <Route path="/revision_y_cierre/:id" element={<RevisarEvaluacion />} />
+          {/* Rutas de Coordinacion */}
+          <Route path="/bandeja_de_casos" element={<ListadoCasos />} />
+          <Route path="/bandeja_de_casos/:id" element={<DetalleCaso />} />
+          <Route path="/bandeja_de_casos/:id/cierre" element={<CierreExpediente />} />
+          <Route path="/denuncias" element={<ListadoDenuncias />} />
+          <Route path="/denuncias/:id" element={<FormularioDenuncia />} />
+          <Route path="/programacion" element={<ListadoProgramacion />} />
+          <Route path="/programacion/:id" element={<FormularioProgramacion />} />
+          <Route path="/asignaciones" element={<ListadoAsignaciones />} />
+          <Route path="/alertas_lapch" element={<ListadoAlertas />} />
+          <Route path="/alertas_lapch/:id" element={<DetalleAlerta />} />
+          <Route path="/revision_y_cierre" element={<ListadoRevisiones />} />
+          <Route path="/revision_y_cierre/:id" element={<RevisarEvaluacion />} />
 
-        {/* Rutas de Administracion */}
-        <Route path="/auditoria" element={<Auditoria />} />
-        <Route path="/catalogos" element={<Catalogos />} />
-        <Route path="/fichas" element={<ListadoFichas />} />
-        <Route path="/fichas/editor/:id" element={<EditorFicha />} />
-        <Route path="/plantillas_de_correo" element={<Plantillas_de_correo />} />
-        <Route path="/reglas_de_riesgo" element={<Reglas_de_riesgo />} />
-        <Route path="/roles" element={<Roles />} />
-        <Route path="/salud_operativa_autorizada" element={<Salud_operativa_autorizada />} />
-        <Route path="/usuarios" element={<Usuarios />} />
+          {/* Rutas de Administracion */}
+          <Route path="/auditoria" element={<Auditoria />} />
+          <Route path="/catalogos" element={<Catalogos />} />
+          <Route path="/fichas" element={<ListadoFichas />} />
+          <Route path="/fichas/editor/:id" element={<EditorFicha />} />
+          <Route path="/plantillas_de_correo" element={<Plantillas_de_correo />} />
+          <Route path="/reglas_de_riesgo" element={<Reglas_de_riesgo />} />
+          <Route path="/roles" element={<Roles />} />
+          <Route path="/salud_operativa_autorizada" element={<Salud_operativa_autorizada />} />
+          <Route path="/usuarios" element={<Usuarios />} />
 
-      </Routes>
+        </Routes>
+      </LayoutWrapper>
     </BrowserRouter>
   )
 }
